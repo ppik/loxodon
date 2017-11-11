@@ -5,6 +5,7 @@ from os.path import basename, exists
 from glob import glob
 from random import seed, sample
 from math import ceil
+import shutil
 
 from scipy.io import loadmat
 
@@ -52,3 +53,18 @@ for make in makes:
 
     for image in sample(images, validation_size):
         os.renames(image, image.replace('train/', 'valid/', 1))
+
+## Train for only certain models
+
+keep = {'volkswagen', 'bmw', 'opel', 'mercedes-benz', 'audi', 'renault', 'peugeot', 'ford', 'volvo', 'citroön', 'seat', 'toyota'}
+
+for folder in glob(DATA_PATH + 'train/*'):
+    make = os.path.basename(folder)
+    if make not in keep:
+        os.renames(folder, DATA_PATH + 'hold/train/' + make)
+
+for folder in glob(DATA_PATH + 'valid/*'):
+    make = os.path.basename(folder)
+    if make not in keep:
+        os.renames(folder, DATA_PATH + 'hold/valid/' + make)
+
