@@ -1,3 +1,7 @@
 data/*
 .ipynb_checkpoints
 
+db.sqlite3
+__pycache__
+
+videos/*
