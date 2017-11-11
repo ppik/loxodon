@@ -15,10 +15,70 @@
             text-align: left;
             padding: 8px;
         }
+        nav ul{height:200px; width:18%;}
+        nav ul{overflow:hidden; overflow-y:scroll;}
+        table {
+            border-style: groove;
+            border-color: light-blue;
+            border-width: 1px;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+30,d8f6ff+99 */
+background: rgb(255,255,255); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,1) 30%, rgba(216,246,255,1) 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 30%,rgba(216,246,255,1) 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(255,255,255,1) 30%,rgba(216,246,255,1) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d8f6ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+        body {
+            font-family: Helvetica;
+
+        }
+        .fonts {
+            font-size: 20px;
+            padding-left: 42px;
+        }
+        p {
+            font-size: 20px;
+        }
+        #topofpage {
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#258dc8+0,258dc8+100;Blue+Flat+%231 */
+background: rgb(37,141,200); /* Old browsers */
+background: -moz-linear-gradient(45deg, rgba(37,141,200,1) 0%, rgba(37,141,200,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', endColorstr='#258dc8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
         </style>
+
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
 
     <body>
+    <div id="topofpage" class="row">
+        <div class="col-md-6">
+        <label class="fonts">Available classes</label>
+        <nav>
+            <ul>
+                <table class="table table-bordered table-hovered "cellspacing='0'>
+                    {% for class_name in classes %}
+                        <tr>
+                            <td>{{ class_name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+
+            </ul>
+        </nav>
+        </div>
+        <div class="col-md-2">
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -33,9 +93,13 @@
 
             <p><input type="submit" value="Upload"/></p>
         </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
         <!-- List of done logo analyzes -->
         {% if logoanalyzes %}
-            <table style="width:100%">
+            <table>
               <tr>
                 <th>Video name</th>
                 <th>Video</th>
@@ -60,6 +124,7 @@
         <p>0 videos uploaded</p>
         {% endif %}
 
+    </div></div>
 
     </body>
 
