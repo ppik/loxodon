@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from logos.keras_run import get_prediction
 import json
+from django.core.files.storage import FileSystemStorage
+from time import sleep
 
 with open('models/carnet-2017-11-11T14:57:39.955932-classes.json') as data_file:
     classes_json = json.load(data_file)
@@ -19,16 +21,21 @@ def index(request):
     if request.method == 'POST':
         form = LogoAnalyzeForm(request.POST, request.FILES)
         if form.is_valid():
-            logoanalyze = form.save(commit=False)
-            print(logoanalyze.video)
+            logoanalyze = form.save()
+            logoanalyze.save()
 
             # Get logo names / confidence scores
-            brand, confidence = get_prediction(logoanalyze.video)
+            values, class_names = get_prediction(logoanalyze.video)
 
-            logoanalyze.precision = confidence #"Enter your precision here"
-            logoanalyze.suggested_logo_name = brand #"Enter your suggested logo name here"
+            LogoAnalyze.objects.filter(video=logoanalyze.video).update(logo_name_1 = class_names[0],
+                                                                 precision_1 = values[0],
+                                                                 logo_name_2 = class_names[1],
+                                                                 precision_2 = values[1],
+                                                                 logo_name_3 = class_names[2],
+                                                                 precision_3 = values[2])
+
+
             # Redirect to index page
-            logoanalyze.save()
             return HttpResponseRedirect(reverse('index'))
     else:
         form = LogoAnalyzeForm()  # A empty, unbound form

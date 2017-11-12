@@ -5,7 +5,7 @@
         <title>Car Logo Detection</title>
         <style>
         table {
-            font-family: arial, sans-serif;
+            font-family: Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
@@ -14,6 +14,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
+            font-size: 20px;
         }
         nav ul{height:200px; width:18%;}
         nav ul{overflow:hidden; overflow-y:scroll;}
@@ -56,28 +57,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', end
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     </head>
 
     <body>
     <div id="topofpage" class="row">
-        <div class="col-md-6">
-        <label class="fonts">Available classes</label>
-        <nav>
-            <ul>
-                <table class="table table-bordered table-hovered "cellspacing='0'>
-                    {% for class_name in classes %}
-                        <tr>
-                            <td>{{ class_name }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-
-
-            </ul>
-        </nav>
-        </div>
+    <div class="col-md-1">
+    </div>
         <div class="col-md-2">
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
@@ -91,12 +77,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', end
                 {{ form.video}}
             </p>
 
-            <p><input type="submit" value="Upload"/></p>
+            <p><input onclick="toggleImgVisible('loading')" type="submit" value="Upload"/></p>
+            <img style="visibility: hidden" id="loading" src="loadingu.gif">
         </form>
         </div>
+        <div class="col-md-6">
+
+        <label class="fonts">Available car brands</label>
+        <nav>
+            <ul>
+                <table class="table table-bordered table-hovered "cellspacing='0'>
+                    {% for class_name in classes %}
+                        <tr>
+                            <td>{{ class_name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-3">
+        <p style="font-size: 35px; color: rgb(200, 200, 25z)">Loxodon Logo Challenge</p>
+    </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+    <div class="col-md-1">
+    </div>
+        <div class="col-md-10">
         <!-- List of done logo analyzes -->
         {% if logoanalyzes %}
             <table>
@@ -115,8 +124,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', end
                           Your browser does not support the video tag.
                     </video>
                 </td>
-                <td>{{logoanalyze.suggested_logo_name}}</td>
-                <td>{{logoanalyze.precision}}</td>
+                <td>1. {{logoanalyze.logo_name_1}}<br>2. {{logoanalyze.logo_name_2}}<br>3. {{logoanalyze.logo_name_3}}</td>
+                <td>1. {{logoanalyze.precision_1}}<br>2. {{logoanalyze.precision_2}}<br>3. {{logoanalyze.precision_3}}</td>
               </tr>
                 {% endfor %}
             </table>
@@ -124,8 +133,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', end
         <p>0 videos uploaded</p>
         {% endif %}
 
+    </div><div class="col-md-1">
     </div></div>
 
+    <script>
+        function toggleImgVisible(id) {
+            var img = document.getElementById(id);
+            img.style.visibility = (img.style.visibility=='visible' ? 'hidden' : 'visible');
+        }
+    </script>
     </body>
 
 </html>
