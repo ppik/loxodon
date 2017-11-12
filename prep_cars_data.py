@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from os.path import basename, exists
+from os.path import basename, dirname, exists
 from glob import glob
 from random import seed, sample
 from math import ceil
@@ -68,3 +68,13 @@ for folder in glob(DATA_PATH + 'valid/*'):
     if make not in keep:
         os.renames(folder, DATA_PATH + 'hold/valid/' + make)
 
+
+## Rotate images by 90 degrees
+
+from PIL import Image
+files = glob(DATA_PATH + 'train/*/*')
+for file in files:
+    im = Image.open(file)
+    im = im.transpose(Image.ROTATE_90)
+    im = im.convert('RGB')
+    im.save(DATA_PATH + dirname(file) + '/r' + basename(file))
