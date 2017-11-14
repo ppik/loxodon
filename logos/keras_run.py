@@ -14,13 +14,15 @@ from time import sleep
 
 img_generator = image.ImageDataGenerator()
 
-with open('models/carnet-2017-11-11T14:57:39.955932-classes.json') as data_file:
+model_name = 'models/carnet-2017-11-11T14.57.39.955932'
+
+with open(model_name + '-classes.json') as data_file:
     _classes_json = json.load(data_file)
     classes_json = {str(v): k for k, v in _classes_json.items()}
 
 
 # load json and create mode
-json_file = open('models/carnet-2017-11-11T14:57:39.955932-model.json', 'r')
+json_file = open(model_name + '-model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
@@ -28,7 +30,7 @@ loaded_model = model_from_json(loaded_model_json)
 graph = tf.get_default_graph()
 
 # load weights into new model
-loaded_model.load_weights("models/carnet-2017-11-11T14:57:39.955932-weights.h5")
+loaded_model.load_weights(model_name + '-weights.h5')
 
 # Sliding window
 def sliding_window(image, stepSize, windowSize):
