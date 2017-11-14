@@ -1,4 +1,9 @@
-# Social Ipact Data Hack 2017 -- Loxodon challenge
+# Social Impact Data Hack 2017 -- Loxodon challenge
+
+This code was hacked together during [Social Impact Data Hackaton 2017](http://sidh2017.ut.ee/)
+as part of Loxodon challenge within 48 hours.
+
+See also [this blog post](http://sidh2017.ut.ee/2017/11/12/mentors-hack-teach-your-computer-to-recognize-cars/).
 
 ## Training data
 
@@ -12,7 +17,8 @@ Other possible sources:
 
 * scraping Google image search
 
-* scraping car sales portals (mobile.de, autoscout24.com, auto24.ee, marktplaats.nl etc)
+* scraping car sales portals (mobile.de, autoscout24.com, auto24.ee,
+marktplaats.nl etc)
 
 
 ## Running the web server
