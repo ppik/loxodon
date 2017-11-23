@@ -9,12 +9,13 @@ import shutil
 from subprocess import call
 from PIL import Image
 from keras.preprocessing import image
+from keras.applications.imagenet_utils import preprocess_input
 import tensorflow as tf
 from time import sleep
 
 img_generator = image.ImageDataGenerator()
 
-model_name = 'models/carnet-2017-11-11T14.57.39.955932'
+model_name = 'models/car-inceptionv3-2017-11-22_431'
 
 with open(model_name + '-classes.json') as data_file:
     _classes_json = json.load(data_file)
@@ -44,7 +45,8 @@ def crop_center(img,cropx,cropy):
     y,x,_ = img.shape
     startx = x//2-(cropx//2)
     starty = y//2-(cropy//2)
-    return img[starty:starty+cropy,startx:startx+cropx, :]
+    img = img[starty:starty+cropy,startx:startx+cropx, :]
+    return preprocess_input(img.astype(np.float32), mode='tf')
 
 def biggest_crop_center(img, cropx, cropy):
     pass
@@ -65,7 +67,8 @@ def get_prediction(video_name):
         with graph.as_default():
             #img = Image.open('videos/' + str(video_name))
             img = Image.open(str(video_name))
-            np_img = crop_center(np.array(img), 299, 299)
+            img = img.resize((299, 299))
+            np_img = preprocess_input(np.array(img, dtype=np.float32), mode='tf')
             # winW = 150
             # winH = 300
             # for (x, y, window) in sliding_window(resized, stepSize=32, windowSize=(winW, winH)):
@@ -79,7 +82,8 @@ def get_prediction(video_name):
             # Every x frames
             if idx % 15 == 0:
                 img = Image.open('videos/frames/' + frame)
-                np_img = crop_center(np.array(img), 299, 299)
+                img = img.resize((299, 299))
+                np_img = preprocess_input(np.array(img, dtype=np.float32), mode='tf')
 
                 #np_img = np.array(img)
                 with graph.as_default():

@@ -11,7 +11,7 @@ import json
 from django.core.files.storage import FileSystemStorage
 from time import sleep
 
-with open('models/carnet-2017-11-11T14:57:39.955932-classes.json') as data_file:
+with open('models/car-inceptionv3-2017-11-22_431-classes.json') as data_file:
     classes_json = json.load(data_file)
 
 classes = [c.replace('_', ' ').title() for c in classes_json.keys()]
