@@ -20,6 +20,12 @@ Other possible sources:
 * scraping car sales portals (mobile.de, autoscout24.com, auto24.ee,
 marktplaats.nl etc)
 
+## Dependencies
+
+This project uses [pipfile](https://github.com/pypa/pipfile) to manage its
+Python dependencies.
+
+Additionally it requeres that ffmpeg would be installed.
 
 ## Running the web server
 
@@ -27,8 +33,8 @@ Simple UI with file upload with Django
 To run Django you need Python (3) and Django (latest) downloaded.
 When on command line:
 
-$ git clone https://github.com/varje/loxodon.git
 $ python manage.py migrate
+
 $ python manage.py runserver
 
-Open web-browser: localhost:8000/logos/ or http://127.0.0.1:8000/logos/
+Open web-browser: http://127.0.0.1:8000/
