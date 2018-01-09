@@ -75,6 +75,8 @@ def get_prediction(video_name):
             prediction = loaded_model.predict(np_img.reshape(-1, np_img.shape[0], np_img.shape[1], 3))
             predictions.append(prediction)
     else:
+        os.makedirs('videos/frames', exist_ok=True)
+
         # Hackathon way to get hacked
         call(["ffmpeg", "-i", str(video_name), "videos/frames/out-%03d.jpg"])
 
