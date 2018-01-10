@@ -5,6 +5,13 @@ as part of Loxodon challenge within 48 hours.
 
 See also [this blog post](http://sidh2017.ut.ee/2017/11/12/mentors-hack-teach-your-computer-to-recognize-cars/).
 
+## Cloning
+
+This repository uses (Git Large File Storage)[https://git-lfs.github.com/]
+for storing trained models.
+Ensure that the git lfs extension is installed before cloning.
+
+
 ## Training data
 
 Cars Dataset http://ai.stanford.edu/~jkrause/cars/car_dataset.html
