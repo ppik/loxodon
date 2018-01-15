@@ -5,6 +5,7 @@ as part of Loxodon challenge within 48 hours.
 
 See also [this blog post](http://sidh2017.ut.ee/2017/11/12/mentors-hack-teach-your-computer-to-recognize-cars/).
 
+
 ## Training data
 
 Cars Dataset http://ai.stanford.edu/~jkrause/cars/car_dataset.html
@@ -20,12 +21,14 @@ Other possible sources:
 * scraping car sales portals (mobile.de, autoscout24.com, auto24.ee,
 marktplaats.nl etc)
 
+
 ## Dependencies
 
 This project uses [pipfile](https://github.com/pypa/pipfile) to manage its
 Python dependencies.
 
-Additionally it requeres that ffmpeg would be installed.
+Additionally the app requires that ffmpeg would be installed.
+
 
 ## Running the web server
 
@@ -38,3 +41,14 @@ $ python manage.py migrate
 $ python manage.py runserver
 
 Open web-browser: http://127.0.0.1:8000/
+
+
+## Docker image
+
+Build a docker image
+
+$ docker build . -t loxodon
+
+Running
+
+$ docker run -it --rm -p 8000:8000 loxodon
