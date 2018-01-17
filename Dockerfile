@@ -14,16 +14,8 @@ RUN pip install --no-cache-dir pipenv && \
     apt-get update && \
     apt-get -y -t jessie-backports install ffmpeg
 
-RUN apt install -y wget 
-# as make was not working...
-#RUN apt install -y build-essential
 
 COPY . /app
-
-RUN cd darknet
-#RUN make
-RUN wget https://pjreddie.com/media/files/tiny-yolo.weights
-RUN cd ..
 
 RUN python manage.py migrate
 
