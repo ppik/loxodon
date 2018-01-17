@@ -12,6 +12,7 @@ from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
 import tensorflow as tf
 from time import sleep
+#from loxodon.darknet.find_cars import detect_video
 
 img_generator = image.ImageDataGenerator()
 
@@ -77,7 +78,18 @@ def get_prediction(video_name):
     else:
         os.makedirs('videos/frames', exist_ok=True)
 
-        # Hackathon way to get hacked
+        # Hackathon way to get
+        # better way yo
+        # TODO actually ask for these parameters?
+        # input video location
+        video_location = str(video_name)
+        # skip every nth frame
+        skip = 5
+        # output location for found cars
+        output_dir = 'videos/frames/'
+        # detection threshold for yolonet
+        threshold = 0.5
+        #detect_video(video_location, skip, output_dir, threshold)
         call(["ffmpeg", "-i", str(video_name), "videos/frames/out-%03d.jpg"])
 
         for idx, frame in enumerate(list(os.listdir('videos/frames'))):

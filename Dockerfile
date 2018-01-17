@@ -16,6 +16,14 @@ RUN pip install --no-cache-dir pipenv && \
 
 COPY . /app
 
+# madis
+#RUN apt install -y wget
+RUN cd logos
+RUN cd ..
+RUN cd darknet
+#RUN bash start_me_first.sh
+
+
 RUN python manage.py migrate
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
