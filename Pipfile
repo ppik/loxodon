@@ -12,6 +12,7 @@ tensorflow = "*"
 django = "<2.0"
 "h5py" = "*"
 pillow = "*"
+opencv-python = "*"
 
 
 [dev-packages]
