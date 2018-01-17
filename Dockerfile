@@ -17,12 +17,10 @@ RUN pip install --no-cache-dir pipenv && \
 COPY . /app
 
 # madis
-#RUN apt install -y wget
-RUN cd logos
-RUN cd ..
+RUN apt install -y wget
 RUN cd darknet
-#RUN bash start_me_first.sh
-
+RUN wget https://pjreddie.com/media/files/tiny-yolo.weights
+RUN cd ..
 
 RUN python manage.py migrate
 

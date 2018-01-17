@@ -5,3 +5,5 @@
 !models/
 !loadingu.gif
 !Pipfile*
+!darknet/
+!__init__.py
