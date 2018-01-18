@@ -12,6 +12,7 @@ from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
 import tensorflow as tf
 from time import sleep
+from darknet.find_cars import detect_video
 
 img_generator = image.ImageDataGenerator()
 
@@ -77,20 +78,29 @@ def get_prediction(video_name):
     else:
         os.makedirs('videos/frames', exist_ok=True)
 
-        # Hackathon way to get hacked
-        call(["ffmpeg", "-i", str(video_name), "videos/frames/out-%03d.jpg"])
+        # Hackathon way to get
+        # better way yo
+        # TODO actually ask for these parameters?
+        # input video location
+        video_location = str(video_name)
+        # skip every nth frame
+        skip = 5
+        # output location for found cars
+        output_dir = 'videos/frames'
+        # detection threshold for yolonet
+        threshold = 0.5
+        detect_video(video_location, skip, output_dir, threshold)
+        #call(["ffmpeg", "-i", str(video_name), "videos/frames/out-%03d.jpg"])
 
         for idx, frame in enumerate(list(os.listdir('videos/frames'))):
-            # Every x frames
-            if idx % 15 == 0:
-                img = Image.open('videos/frames/' + frame)
-                img = img.resize((299, 299))
-                np_img = preprocess_input(np.array(img, dtype=np.float32), mode='tf')
+            img = Image.open('videos/frames/' + frame)
+            img = img.resize((299, 299))
+            np_img = preprocess_input(np.array(img, dtype=np.float32), mode='tf')
 
-                #np_img = np.array(img)
-                with graph.as_default():
-                    prediction = loaded_model.predict(np_img.reshape(-1, np_img.shape[0], np_img.shape[1], 3))
-                    predictions.append(prediction)
+            #np_img = np.array(img)
+            with graph.as_default():
+                prediction = loaded_model.predict(np_img.reshape(-1, np_img.shape[0], np_img.shape[1], 3))
+                predictions.append(prediction)
 
     # Delete all files in frames folder, but leave the frames folder
     for the_file in os.listdir('videos/frames'):
