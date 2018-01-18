@@ -14,8 +14,17 @@ RUN pip install --no-cache-dir pipenv && \
     apt-get update && \
     apt-get -y -t jessie-backports install ffmpeg
 
-
 COPY . /app
+
+RUN apt install -y build-essential git wget
+
+RUN git clone https://github.com/MadisKarli/darknet
+
+WORKDIR darknet
+RUN make
+RUN bash start_me_first.sh
+
+WORKDIR /app
 
 RUN python manage.py migrate
 
